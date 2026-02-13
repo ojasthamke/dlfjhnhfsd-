@@ -15,7 +15,7 @@ html, body {
     margin: 0;
     padding: 0;
     background-color: black;
-    overflow: hidden; /* Prevent scrolling */
+    overflow: hidden;
     font-family: 'Poppins', sans-serif;
     color: white;
     -webkit-tap-highlight-color: transparent;
@@ -100,10 +100,9 @@ html, body {
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* Align contents to top */
+    justify-content: center;
     align-items: center;
     position: relative;
-    padding-top: 80px; /* Space from top edge */
     animation: entrance-scale 1.2s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
@@ -115,7 +114,7 @@ html, body {
 /* White Strip (The Line) */
 .white-strip {
     position: absolute;
-    top: 55%; /* Centered slightly below the middle */
+    top: 50%;
     left: -10%;
     width: 120%;
     height: 100px;
@@ -128,39 +127,42 @@ html, body {
     transform: translateY(-50%) rotate(-5deg);
 }
 
-/* Vaibhav Image Stylings - Saperated from line, moved to top section */
+/* Vaibhav Image Stylings - Corrected to sit perfectly in the circle */
 .vaibhav-container {
-    position: relative; /* Relative within the flex hero section */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -100%) rotate(-5deg);
     width: 280px;
-    height: 320px;
+    height: 280px;
     display: flex;
     justify-content: center;
-    align-items: flex-end;
-    z-index: 5;
+    align-items: center;
+    z-index: 11;
     pointer-events: none;
-    margin-bottom: 40px; /* Gap before the line area */
 }
 
 .vaibhav-circle-bg {
-    position: absolute;
-    bottom: 0;
+    position: relative;
     width: 240px;
     height: 240px;
     background: linear-gradient(to bottom, var(--primary-red), black);
     border-radius: 50%;
     border: 4px solid white;
     box-shadow: 0 0 20px white, 0 0 40px var(--primary-red);
-    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; /* Align image to bottom of circle */
+    overflow: hidden; /* Keep image inside the circle boundary */
 }
 
 .vaibhav-img {
-    width: 260px;
-    height: auto;
-    max-height: 320px;
-    object-fit: contain;
-    position: relative;
-    z-index: 2;
-    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.8));
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cover the circle area */
+    position: absolute;
+    bottom: 0;
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
 }
 
 .pizza-wrapper {
@@ -222,7 +224,7 @@ html, body {
     box-shadow: 0 8px 20px rgba(0,0,0,0.4);
 }
 
-/* Products Section (Slide View) */
+/* Products Section */
 .products-section {
     height: 100%;
     width: 100%;
@@ -282,6 +284,12 @@ html, body {
     position: relative;
     margin-top: 40px;
     transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: card-reveal 0.8s cubic-bezier(0.23, 1, 0.32, 1) backwards;
+}
+
+@keyframes card-reveal {
+    from { opacity: 0; transform: translateY(50px) scale(0.9); filter: blur(10px); }
+    to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
 }
 
 .product-card:hover {
@@ -359,17 +367,21 @@ html, body {
     .cart-icon { top: 20px; right: 20px; }
 
     .vaibhav-container {
+        top: 50%;
         width: 200px;
-        height: 240px;
-        margin-bottom: 20px;
+        height: 200px;
+        transform: translate(-50%, -100%) rotate(-5deg);
     }
-    .vaibhav-circle-bg { width: 160px; height: 160px; }
-    .vaibhav-img { width: 180px; max-height: 240px; }
+    .vaibhav-circle-bg {
+        width: 160px;
+        height: 160px;
+    }
+    .vaibhav-img { width: 100%; height: 100%; }
 
-    .white-strip { top: 60%; height: 70px; }
+    .white-strip { height: 70px; }
     .pizza-hero { width: 60px; height: 60px; }
 
-    .order-btn { top: 82%; }
+    .order-btn { top: 78%; }
 
     .products-grid { grid-template-columns: 1fr; }
 
